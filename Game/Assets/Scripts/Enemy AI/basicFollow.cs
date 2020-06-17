@@ -7,11 +7,36 @@ public class basicFollow : MonoBehaviour
 
     public float speed;
 
-    public Transform target;
+    public GameObject targetGameObject;
+
+    private Transform target;
+
+    public Rigidbody2D rb;
+
+    private Vector2 movement;
+
+    private void Start()
+    {
+        target = targetGameObject.GetComponent<Transform>();
+        rb = this.GetComponent<Rigidbody2D>();
+    }
+
 
 
     private void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+        Vector3 direction = target.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
+        direction.Normalize();
+        movement = direction;
+        moveCharacter(movement);
+    }
+
+
+
+    void moveCharacter(Vector2 direction)
+    {
+        rb.MovePosition((Vector2) transform.position + (direction * speed * Time.fixedDeltaTime));
     }
 }

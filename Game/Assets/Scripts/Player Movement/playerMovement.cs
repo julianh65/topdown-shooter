@@ -29,6 +29,7 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(sprintKey)){
             sprint();
         }

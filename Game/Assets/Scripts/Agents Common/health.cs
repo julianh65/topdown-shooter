@@ -6,25 +6,29 @@ public class health : MonoBehaviour
 {
     public float healthAmount;
 
-    void takeDamage(float damageAmount)
+    public void takeDamage(float damageAmount)
     {
         healthAmount -= damageAmount;
+        Debug.Log("Taken " + damageAmount + "damage");
+        Debug.Log(healthAmount);
     }
 
-    void heal(float healAmount)
+    public static void heal(float healAmount)
     {
         healAmount += healAmount;
     }
 
-    void onDeath()
+    public void onDeath()
     {
-        //call any death functions here
+        Debug.Log("Dying");
+        Destroy(gameObject);
+
     }
 
 
-    void Update()
+    public void Update()
     {
-        if(healthAmount == 0)
+        if(healthAmount < 0)
         {
             onDeath();
         }
